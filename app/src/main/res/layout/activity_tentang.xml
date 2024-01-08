@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/cream"
+    tools:context=".TentangActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/primaryColor"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_marginStart="20dp"
+            android:layout_width="30dp"
+            android:layout_height="25dp"
+            android:src="@drawable/arrow_left_solid"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/poppinssemibold"
+            android:gravity="center"
+            android:layout_marginStart="20dp"
+            android:text="Tentang"
+            android:textColor="@color/white"
+            android:textSize="26sp"
+            android:layout_marginTop="7dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/back"
+            app:layout_constraintTop_toTopOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:src="@drawable/logo"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tentang Kami"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:fontFamily="@font/poppinssemibold"
+        android:layout_marginHorizontal="20dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tentang_kami"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:fontFamily="@font/poppinsregular"
+        android:layout_marginHorizontal="20dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Developer"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:fontFamily="@font/poppinssemibold"
+        android:layout_marginHorizontal="20dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Rachma Fadhillah Prasetyo"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:fontFamily="@font/poppinsregular"
+        android:layout_marginHorizontal="20dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="rachma.fadhillah@mhs.itenas.ac.id"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:fontFamily="@font/poppinsregular"
+        android:layout_marginHorizontal="20dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pemrograman IoT"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:fontFamily="@font/poppinsregular"
+        android:layout_marginHorizontal="20dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="152021090"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:fontFamily="@font/poppinsregular"
+        android:layout_marginHorizontal="20dp"/>
+
+</LinearLayout>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cream"
+    tools:context=".MenuActivity">
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/btmr"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/primaryColor">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/icon"
+                android:layout_marginStart="20dp"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/icon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/poppinssemibold"
+                android:gravity="center"
+                android:text="@string/application"
+                android:textColor="@color/white"
+                android:textSize="26sp"
+                android:layout_marginTop="7dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/icon"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <ImageView
+                android:id="@+id/iv_1"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/gear_solid"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.navigation.NavigationView>
+
+    <FrameLayout
+        android:id="@+id/f_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/btmr"
+        android:layout_above="@id/bottomnavview"/>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomnavview"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:menu = "@menu/bottom_nav_menu"
+        android:layout_alignParentBottom="true"
+        style="@style/navButton"
+        android:layout_marginVertical="5dp"
+        android:layout_marginHorizontal="10dp"
+        app:itemIconSize="30dp"
+        app:itemIconTint="@drawable/item_selector"
+        app:labelVisibilityMode="unlabeled"
+        app:itemRippleColor="@android:color/transparent"
+        app:elevation="2dp"
+        app:itemActiveIndicatorStyle="@android:color/transparent"/>
+
+</RelativeLayout>

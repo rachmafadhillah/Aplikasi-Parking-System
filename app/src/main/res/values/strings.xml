@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">SparX</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="title">
+        Parkir Mudah
+        \nTemukan di Sini!
+    </string>
+
+    <string name="sub_title">
+        Manfaatkan kecanggihan Aplikasi Parkir Kami! Pantau slot kosong dan terisi secara real-time
+        \nuntuk memastikan Anda selalu menemukan
+        \ntempat parkir yang tepat.Nikmati kemudahan
+        \ndan kenyamanan dalam mengelola perjalanan
+        \nAnda dengan informasi parkir yang akurat.
+        \nJadikan setiap perjalanan lebih efisien dan lancar
+        \ndengan Aplikasi Parkir kami yang intuitif dan cerdas!
+    </string>
+    <string name="application">SParX</string>
+    <string name="tentang_kami">Produk yang akan dibuat merupakan sebuah alat dan
+        program Parking Management System berbasis IOT dengan nama aplikasi “SParX”.
+        Produk ini adalah solusi canggih yang dirancang untuk mengelola dan
+        mengoptimalkan pengelolaan tempat parkir. Dengan adanya aplikasi ini
+        dapat mengetahui slot tersedia dan slot yang terisi pada suatu
+        tempat parkir yang memiliki sistem ini.</string>
+</resources>
