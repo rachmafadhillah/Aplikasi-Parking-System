@@ -24,4 +24,5 @@
         mengoptimalkan pengelolaan tempat parkir. Dengan adanya aplikasi ini
         dapat mengetahui slot tersedia dan slot yang terisi pada suatu
         tempat parkir yang memiliki sistem ini.</string>
+    <string name="data_pengguna">Tidak Ada \nData Pengguna</string>
 </resources>

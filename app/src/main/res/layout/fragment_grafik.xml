@@ -57,7 +57,7 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        android:text="Rachma  "/>
+                        android:text="Data Pengunjung"/>
 
                     <com.db.williamchart.view.LineChartView
                         android:id="@+id/lineChart"

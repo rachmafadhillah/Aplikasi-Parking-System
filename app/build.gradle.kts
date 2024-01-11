@@ -49,6 +49,7 @@ dependencies {
     implementation("com.google.firebase:firebase-auth:22.2.0")
     implementation("androidx.core:core-splashscreen:1.0.0")
     implementation("org.chromium.net:cronet-embedded:113.5672.61")
+    implementation("com.google.firebase:firebase-database:20.3.0")
     testImplementation("junit:junit:4.13.2")
     implementation ("androidx.fragment:fragment-ktx:1.3.6")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

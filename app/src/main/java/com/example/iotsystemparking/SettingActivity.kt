@@ -57,12 +57,12 @@ class SettingActivity : AppCompatActivity() {
         }
 
         binding.dataPengguna.setOnClickListener {
-            val intent = Intent(this, ProfileActivity::class.java)
+            val intent = Intent(this, CrudActivity::class.java)
             startActivity(intent)
         }
 
         binding.taplikasi.setOnClickListener {
-            val intent = Intent(this, TentangActivity::class.java)
+            val intent = Intent(this, PenggunaActivity::class.java)
             startActivity(intent)
         }
 
