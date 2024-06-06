@@ -3,15 +3,16 @@ package com.example.iotsystemparking
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import com.db.williamchart.view.BarChartView
 import com.example.iotsystemparking.config.ConfigPendapatan
 import com.example.iotsystemparking.databinding.FragmentGrafikBinding
 import com.example.iotsystemparking.model.ModelAverage
+import com.example.iotsystemparking.model.ModelSlot
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -106,7 +107,7 @@ class GrafikFragment : Fragment() {
                     response: Response<ModelAverage>
                 ) {
                     if (response.isSuccessful) {
-                        parseData(response.body())
+                        parseDataLine(response.body())
                         updateCharts()
                     }
                 }
@@ -116,42 +117,63 @@ class GrafikFragment : Fragment() {
                 }
 
             })
-    }
 
-    private fun parseData(modelAverage: ModelAverage?) {
-        modelAverage?.let {
-            it.data?.let { data ->
-                val senin = data.senin ?: 0
-                val selasa = data.selasa ?: 0
-                val rabu = data.rabu ?: 0
-                val kamis = data.kamis ?: 0
-                val jumat = data.jumat ?: 0
-                val sabtu = data.sabtu ?: 0
-                val minggu = data.minggu ?: 0
+        // Your code for getSlot1Service remains the same
+        ConfigPendapatan().getSlot1Service()
+            .getSlot1Data()
+            .enqueue(object : Callback<ModelSlot> {
+                override fun onResponse(call: Call<ModelSlot>, response: Response<ModelSlot>) {
+                    Log.d("rachmafadhillah", "data json: " + response.body())
 
-                lineSet.apply {
-                    clear()
-                    add("Senin" to senin.toFloat())
-                    add("Selasa" to selasa.toFloat())
-                    add("Rabu" to rabu.toFloat())
-                    add("Kamis" to kamis.toFloat())
-                    add("Jumat" to jumat.toFloat())
-                    add("Sabtu" to sabtu.toFloat())
-                    add("Minggu" to minggu.toFloat())
+                    updateBarChart(0, response.body()?.totalKendaraan ?: 0)
                 }
 
-                barSet.apply {
+                override fun onFailure(call: Call<ModelSlot>, t: Throwable) {
+                    Log.d("rachmafadhillah", "error: " + t.message.toString())
+                }
+            })
+
+        // Your code for getSlot2Service remains the same
+        ConfigPendapatan().getSlot2Service()
+            .getSlot2Data()
+            .enqueue(object : Callback<ModelSlot> {
+                override fun onResponse(call: Call<ModelSlot>, response: Response<ModelSlot>) {
+                    Log.d("rachmafadhillah", "data json: " + response.body())
+
+                    updateBarChart(0, response.body()?.totalKendaraan ?: 0)
+                }
+
+                override fun onFailure(call: Call<ModelSlot>, t: Throwable) {
+                    Log.d("rachmafadhillah", "error: " + t.message.toString())
+                }
+            })
+    }
+
+    private fun parseDataLine(modelAverage: ModelAverage?) {
+        modelAverage?.let {
+            it.data?.let { data ->
+                lineSet.apply {
                     clear()
-                    add("Senin" to senin.toFloat())
-                    add("Selasa" to selasa.toFloat())
-                    add("Rabu" to rabu.toFloat())
-                    add("Kamis" to kamis.toFloat())
-                    add("Jumat" to jumat.toFloat())
-                    add("Sabtu" to sabtu.toFloat())
-                    add("Minggu" to minggu.toFloat())
+                    add("Senin" to (data.senin ?: 0).toFloat())
+                    add("Selasa" to (data.selasa ?: 0).toFloat())
+                    add("Rabu" to (data.rabu ?: 0).toFloat())
+                    add("Kamis" to (data.kamis ?: 0).toFloat())
+                    add("Jumat" to (data.jumat ?: 0).toFloat())
+                    add("Sabtu" to (data.sabtu ?: 0).toFloat())
+                    add("Minggu" to (data.minggu ?: 0).toFloat())
                 }
             }
         }
+    }
+
+    private fun updateBarChart(slot1Value: Int, slot2Value: Int) {
+        val entries = linkedMapOf<String, Float>()
+        entries["Mobil"] = slot1Value.toFloat()
+        entries["Motor"] = slot2Value.toFloat()
+
+        val barChartView = binding.barChart  // Replace 'barChart' with the actual name of your bar chart view
+
+        barChartView.show(entries)
     }
 
     private fun updateCharts() {

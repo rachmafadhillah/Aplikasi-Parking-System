@@ -61,8 +61,13 @@ class SettingActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        binding.taplikasi.setOnClickListener {
+        binding.tmbPengguna.setOnClickListener {
             val intent = Intent(this, PenggunaActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.taplikasi.setOnClickListener {
+            val intent = Intent(this, TentangActivity::class.java)
             startActivity(intent)
         }
 

@@ -13,6 +13,7 @@ import com.example.iotsystemparking.config.ConfigPendapatan
 import com.example.iotsystemparking.config.DataConfig2
 import com.example.iotsystemparking.model.ModelAverage
 import com.example.iotsystemparking.model.ModelListGempa
+import com.example.iotsystemparking.model.ModelPendapatan
 import com.example.iotsystemparking.model.ModelSlot
 import retrofit2.Call
 import retrofit2.Callback
@@ -41,6 +42,11 @@ class PengunjungFragment : Fragment() {
     private lateinit var sabtu: TextView
     private lateinit var minggu: TextView
 
+    private lateinit var tgl: TextView
+    private lateinit var total: TextView
+    private lateinit var tgl2: TextView
+    private lateinit var total2: TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -65,6 +71,13 @@ class PengunjungFragment : Fragment() {
         sabtu = rootView.findViewById(R.id.tv_sabtu)
         minggu = rootView.findViewById(R.id.tv_minggu)
 
+        // Initialize your TextViews and other views
+        tgl = rootView.findViewById(R.id.tv_mtanggal)
+        total = rootView.findViewById(R.id.tv_mtotal)
+
+        tgl2 = rootView.findViewById(R.id.tv_tanggal)
+        total2 = rootView.findViewById(R.id.tv_total)
+
         // ... (repeat for other views)
 
         return rootView
@@ -80,20 +93,60 @@ class PengunjungFragment : Fragment() {
                 override fun onResponse(call: Call<ModelAverage>, response: Response<ModelAverage>) {
                     Log.d("rachmafadhillah", "data json: " + response.body())
 
-                    senin.setText(response.body()?.data?.senin)
-                    selasa.setText(response.body()?.infogempa?.gempa?.jam)
-                    rabu.setText(response.body()?.infogempa?.gempa?.dateTime)
-                    kamis.setText(response.body()?.infogempa?.gempa?.coordinates)
-                    jumat.setText(response.body()?.infogempa?.gempa?.lintang)
-                    sabtu.setText(response.body()?.infogempa?.gempa?.bujur)
-                    minggu.setText(response.body()?.infogempa?.gempa?.magnitude)
-
+                    senin.setText(response.body()?.data?.senin.toString())
+                    selasa.setText(response.body()?.data?.selasa.toString())
+                    rabu.setText(response.body()?.data?.rabu.toString())
+                    kamis.setText(response.body()?.data?.kamis.toString())
+                    jumat.setText(response.body()?.data?.jumat.toString())
+                    sabtu.setText(response.body()?.data?.sabtu.toString())
+                    minggu.setText(response.body()?.data?.minggu.toString())
                 }
 
                 override fun onFailure(call: Call<ModelAverage>, t: Throwable) {
                     Log.d("rachmafadhillah", "error: " + t.message.toString())
                 }
 
+
+            })
+
+        // Your code remains mostly the same
+        ConfigPendapatan().getMotorService()
+            .getMotorData()
+            .enqueue(object : Callback<ModelPendapatan>{
+                override fun onResponse(
+                    call: Call<ModelPendapatan>,
+                    response: Response<ModelPendapatan>
+                ) {
+                    Log.d("rachmafadhillah", "data json: " + response.body())
+
+                    tgl.text = response.body()?.data?.tanggal
+                    total.text = response.body()?.data?.totalHarga
+                }
+
+                override fun onFailure(call: Call<ModelPendapatan>, t: Throwable) {
+                    Log.d("rachmafadhillah", "error: " + t.message.toString())
+
+                }
+
+            })
+
+        ConfigPendapatan().getMobilService()
+            .getMobilData()
+            .enqueue(object : Callback<ModelPendapatan>{
+                override fun onResponse(
+                    call: Call<ModelPendapatan>,
+                    response: Response<ModelPendapatan>
+                ) {
+                    Log.d("rachmafadhillah", "data json: " + response.body())
+
+                    tgl2.text = response.body()?.data?.tanggal
+                    total2.text = response.body()?.data?.totalHarga
+                }
+
+                override fun onFailure(call: Call<ModelPendapatan>, t: Throwable) {
+                    Log.d("rachmafadhillah", "error: " + t.message.toString())
+
+                }
 
             })
     }

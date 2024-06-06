@@ -35,12 +35,11 @@ class DataFragment : Fragment() {
     private var param2: String? = null
 
     private lateinit var slot1: TextView
-    private lateinit var tgl: TextView
-    private lateinit var total: TextView
-
     private lateinit var slot2: TextView
-    private lateinit var tgl2: TextView
-    private lateinit var total2: TextView
+    private lateinit var slotjml: TextView
+
+    private var totalSlot1: Int = 0
+    private var totalSlot2: Int = 0
 
     private val handler = Handler()
     private val scope = CoroutineScope(Dispatchers.Main+Job())
@@ -63,13 +62,7 @@ class DataFragment : Fragment() {
         // Initialize your TextViews and other views
         slot1 = rootView.findViewById(R.id.isi_lt1)
         slot2 = rootView.findViewById(R.id.isi_lt2)
-
-        // Initialize your TextViews and other views
-        tgl = rootView.findViewById(R.id.tv_mtanggal)
-        total = rootView.findViewById(R.id.tv_mtotal)
-
-        tgl2 = rootView.findViewById(R.id.tv_tanggal)
-        total2 = rootView.findViewById(R.id.tv_total)
+        slotjml = rootView.findViewById(R.id.isi_jml)
 
         // ... (repeat for other views)
 
@@ -98,7 +91,8 @@ class DataFragment : Fragment() {
                 override fun onResponse(call: Call<ModelSlot>, response: Response<ModelSlot>) {
                     Log.d("rachmafadhillah", "data json: " + response.body())
 
-                    slot1.text = response.body()?.totalKendaraan.toString()
+                    totalSlot1 = response.body()?.totalKendaraan ?: 0
+                    updateTotalTextView()
 
                 }
 
@@ -115,7 +109,8 @@ class DataFragment : Fragment() {
                 override fun onResponse(call: Call<ModelSlot>, response: Response<ModelSlot>) {
                     Log.d("rachmafadhillah", "data json: " + response.body())
 
-                    slot2.text = response.body()?.totalKendaraan.toString()
+                    totalSlot2 = response.body()?.totalKendaraan ?: 0
+                    updateTotalTextView()
 
                 }
 
@@ -126,46 +121,14 @@ class DataFragment : Fragment() {
 
             })
 
-        // Your code remains mostly the same
-        ConfigPendapatan().getMotorService()
-            .getMotorData()
-            .enqueue(object : Callback<ModelPendapatan>{
-                override fun onResponse(
-                    call: Call<ModelPendapatan>,
-                    response: Response<ModelPendapatan>
-                ) {
-                    Log.d("rachmafadhillah", "data json: " + response.body())
+    }
 
-                    tgl.text = response.body()?.data?.tanggal
-                    total.text = response.body()?.data?.totalHarga
-                }
-
-                override fun onFailure(call: Call<ModelPendapatan>, t: Throwable) {
-                    Log.d("rachmafadhillah", "error: " + t.message.toString())
-
-                }
-
-            })
-
-        ConfigPendapatan().getMobilService()
-            .getMobilData()
-            .enqueue(object : Callback<ModelPendapatan>{
-                override fun onResponse(
-                    call: Call<ModelPendapatan>,
-                    response: Response<ModelPendapatan>
-                ) {
-                    Log.d("rachmafadhillah", "data json: " + response.body())
-
-                    tgl2.text = response.body()?.data?.tanggal
-                    total2.text = response.body()?.data?.totalHarga
-                }
-
-                override fun onFailure(call: Call<ModelPendapatan>, t: Throwable) {
-                    Log.d("rachmafadhillah", "error: " + t.message.toString())
-
-                }
-
-            })
+    // Function to update the total in TextView
+    fun updateTotalTextView() {
+        val total = totalSlot1 + totalSlot2
+        slot1.text = "$totalSlot1"
+        slot2.text = "$totalSlot2"
+        slotjml.text = total.toString()
     }
 
     companion object {
